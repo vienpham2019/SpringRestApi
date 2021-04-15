@@ -1,18 +1,33 @@
 package com.securewebapp.dao;
 
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.securewebapp.model.Person;
 
 @Repository("fakeDao")
 public class FakePersonDataAccessService implements PersonDao {
+	
+	@Value("${spring.datasource.url}")
+	private String url; 
+	
+	@Value("${spring.datasource.username}")
+	private String username; 
+	
+	@Value("${spring.datasource.password}")
+	private String password; 
 
 	private static List<Person> DB = new ArrayList<>();
+	
 
 	@Override
 	public int insertPerson(UUID id, Person person) {
