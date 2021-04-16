@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.securewebapp.model.Person;
@@ -17,14 +16,27 @@ import com.securewebapp.model.Person;
 @Repository("fakeDao")
 public class FakePersonDataAccessService implements PersonDao {
 	
-	@Value("${spring.datasource.url}")
-	private String url; 
+//	@Value("${spring.datasource.url}")
+	private String url = "jdbc:mysql://127.0.0.1:3306"; 
 	
-	@Value("${spring.datasource.username}")
-	private String username; 
+//	@Value("${spring.datasource.username}")
+	private String username = "ecosystem";  
 	
-	@Value("${spring.datasource.password}")
-	private String password; 
+//	@Value("${spring.datasource.password}")
+	private String password = "Vp1721998"; 
+	
+	private Connection mySQLConnection = null;
+	
+	
+	public FakePersonDataAccessService() {
+		System.out.println(username);
+		try {
+			mySQLConnection = DriverManager.getConnection(url, username, password);
+			System.out.println("MySQL connection extablished");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static List<Person> DB = new ArrayList<>();
 	
