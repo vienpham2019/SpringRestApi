@@ -3,7 +3,9 @@ package com.securewebapp.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +57,19 @@ public class FakePersonDataAccessService implements PersonDao {
 
 	@Override
 	public List<Person> selectAllPeople() {
-		
+		try(Statement stmt = mySQLConnection.createStatement()){ // create statement 
+			
+			// create query command 
+			String query = "SELECT * FROM ecosystem.animals"; 
+			// execute query code 
+			ResultSet rs = stmt.executeQuery(query); 
+			while(rs.next()) {
+				System.out.println(rs.getString("animal_type"));
+			}
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}
 		return DB;
 	}
 
