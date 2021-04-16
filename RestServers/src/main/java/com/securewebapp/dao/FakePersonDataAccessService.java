@@ -55,7 +55,7 @@ public class FakePersonDataAccessService implements PersonDao {
 
 	@Override
 	public List<Person> selectAllPeople() {
-
+		
 		return DB;
 	}
 
