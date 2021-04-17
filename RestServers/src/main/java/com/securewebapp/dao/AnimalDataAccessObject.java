@@ -10,15 +10,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import com.securewebapp.enums.EcosystemType;
 import com.securewebapp.enums.Sex;
 import com.securewebapp.model.Animal;
 
+@Repository("animalDao")
 public class AnimalDataAccessObject implements AnimalDao {
 	
 	private Connection mySQLConnection = null;
 	private static int count = 0; 
+	private static List<Animal> DB = new ArrayList<>();
 	
 	
 	public AnimalDataAccessObject(
@@ -34,13 +37,11 @@ public class AnimalDataAccessObject implements AnimalDao {
 			e.printStackTrace();
 		}
 	}
-
-	private static List<Animal> DB = new ArrayList<>();
 	
 	private Animal setAnimalFromQuery(ResultSet rs) {
 		Animal a = new Animal(); 
 		try {
-			a.setAnimal_id(rs.getInt("animal_type"));
+			a.setAnimal_id(rs.getInt("animal_id"));
 			a.setAnimal_type(rs.getString("animal_type"));
 			a.setAge(rs.getInt("age")); 
 			a.setWeight(rs.getInt("weight"));
@@ -81,8 +82,7 @@ public class AnimalDataAccessObject implements AnimalDao {
 
 	@Override
 	public Optional<Animal> selectAnimalById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return DB.stream().filter(animal -> animal.getAnimal_id() == id).findFirst();
 	}
 
 	@Override
