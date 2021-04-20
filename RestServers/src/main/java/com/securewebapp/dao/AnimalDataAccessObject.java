@@ -38,24 +38,6 @@ public class AnimalDataAccessObject implements AnimalDao {
 		}
 	}
 	
-	private Animal setAnimalFromQuery(ResultSet rs) {
-		Animal a = new Animal(); 
-		try {
-			a.setAnimal_id(rs.getInt("animal_id"));
-			a.setAnimal_type(rs.getString("animal_type"));
-			a.setAge(rs.getInt("age")); 
-			a.setWeight(rs.getInt("weight"));
-			a.setHealth(rs.getByte("health")); 
-			a.setSex(Sex.valueOf(rs.getString("sex")));
-			a.setEcosystem(EcosystemType.valueOf(rs.getString("ecosystem")));
-			
-			count ++; 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return a; 
-	}
 
 	@Override
 	public int insertAnimal(Animal animal) {
@@ -71,7 +53,16 @@ public class AnimalDataAccessObject implements AnimalDao {
 			ResultSet rs = stm.executeQuery("SELECT * FROM ecosystem.animals ;"); 
 			
 			while(rs.next()) {
-				DB.add(setAnimalFromQuery(rs)); 
+				Animal a = new Animal(); 
+				a.setAnimal_id(rs.getInt("animal_id"));
+				a.setAnimal_type(rs.getString("animal_type"));
+				a.setAge(rs.getInt("age")); 
+				a.setWeight(rs.getInt("weight"));
+				a.setHealth(rs.getByte("health")); 
+				a.setSex(Sex.valueOf(rs.getString("sex")));
+				a.setEcosystem(EcosystemType.valueOf(rs.getString("ecosystem")));
+				DB.add(a);
+				count ++ ; 
 			}
 			
 		}catch(SQLException se) {
