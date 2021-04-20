@@ -18,18 +18,15 @@ import com.securewebapp.model.Animal;
 
 @Repository("animalDao")
 public class AnimalDataAccessObject implements AnimalDao {
-	
+
 	private Connection mySQLConnection = null;
-	private static int count = 0; 
+	private static int count = 0;
 	private static List<Animal> DB = new ArrayList<>();
-	
-	
-	public AnimalDataAccessObject(
-			@Value("${spring.datasource.url}") String url , 
-			@Value("${spring.datasource.username}") String username , 
-			@Value("${spring.datasource.password}") String password 
-			) {
-		
+
+	public AnimalDataAccessObject(@Value("${spring.datasource.url}") String url,
+			@Value("${spring.datasource.username}") String username,
+			@Value("${spring.datasource.password}") String password) {
+
 		try {
 			mySQLConnection = DriverManager.getConnection(url, username, password);
 			System.out.println("MySQL connection extablished");
@@ -37,35 +34,49 @@ public class AnimalDataAccessObject implements AnimalDao {
 			e.printStackTrace();
 		}
 	}
-	
 
 	@Override
 	public int insertAnimal(Animal animal) {
 		// TODO Auto-generated method stub
+		animal.setAnimal_id(++count);
+		try (Statement stmt = mySQLConnection.createStatement()) {
+			StringBuilder insert = new StringBuilder("INSERT INTO ecosystem.animals VALUES("); 
+			insert.append(animal.getAnimal_id() + ", '"); 
+			insert.append(animal.getAnimal_type() + "', "); 
+			insert.append(animal.getAge() + ", "); 
+			insert.append(animal.getWeight() + ", '"); 
+			insert.append(animal.getSex() + "', ");
+			insert.append(animal.getHealth() + ", '"); 
+			insert.append(animal.getEcosystem() + "');"); 
+			
+			// Execute the query and wait for the result set
+			int result = stmt.executeUpdate(insert.toString());
+			if (result == 1) {
+				System.out.println(result + " rows inserted: " + animal);
+			}
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}
 		return 0;
 	}
 
 	@Override
 	public List<Animal> selectAllAnimal() {
-		// Create statement 
-		try(Statement stm = mySQLConnection.createStatement()){
+		// Create statement
+		try (Statement stm = mySQLConnection.createStatement()) {
 			// execute query
-			ResultSet rs = stm.executeQuery("SELECT * FROM ecosystem.animals ;"); 
-			
-			while(rs.next()) {
-				Animal a = new Animal(); 
+			ResultSet rs = stm.executeQuery("SELECT * FROM ecosystem.animals ;");
+
+			while (rs.next()) {
+				Animal a = new Animal(rs.getString("animal_type"), rs.getInt("age"), rs.getInt("weight"),
+						rs.getString("sex"), rs.getByte("health"), rs.getString("ecosystem"));
 				a.setAnimal_id(rs.getInt("animal_id"));
-				a.setAnimal_type(rs.getString("animal_type"));
-				a.setAge(rs.getInt("age")); 
-				a.setWeight(rs.getInt("weight"));
-				a.setHealth(rs.getByte("health")); 
-				a.setSex(Sex.valueOf(rs.getString("sex")));
-				a.setEcosystem(EcosystemType.valueOf(rs.getString("ecosystem")));
+
 				DB.add(a);
-				count ++ ; 
+				count = a.getAnimal_id();
 			}
-			
-		}catch(SQLException se) {
+
+		} catch (SQLException se) {
 			se.printStackTrace();
 		}
 		return DB;
