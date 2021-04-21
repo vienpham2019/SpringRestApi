@@ -40,22 +40,17 @@ public class AnimalDataAccessObject implements AnimalDao {
 		// TODO Auto-generated method stub
 		animal.setAnimal_id(++count);
 		try (Statement stmt = mySQLConnection.createStatement()) {
-			
-			String query = "INSERT INTO ecosystem.animals VALUES(" + 
-							animal.getAnimal_id() + ", '" + 
-							animal.getAnimal_type() + "', " + 
-							animal.getAge() + ", " + 
-							animal.getWeight() + ", '" + 
-							animal.getSex() + "', " + 
-							animal.getHealth() + ", '" + 
-							animal.getEcosystem() + "');";  
-			
+
+			String query = "INSERT INTO ecosystem.animals VALUES(" + animal.getAnimal_id() + ", '"
+					+ animal.getAnimal_type() + "', " + animal.getAge() + ", " + animal.getWeight() + ", '"
+					+ animal.getSex() + "', " + animal.getHealth() + ", '" + animal.getEcosystem() + "');";
+
 			// Execute the query and wait for the result set
 			int result = stmt.executeUpdate(query);
 			if (result == 1) {
 				System.out.println(result + " rows inserted: " + animal);
 			}
-		}catch(SQLException se) {
+		} catch (SQLException se) {
 			se.printStackTrace();
 		}
 		return 0;
@@ -96,7 +91,21 @@ public class AnimalDataAccessObject implements AnimalDao {
 
 	@Override
 	public int updateAnimalById(int id, Animal animal) {
-		// TODO Auto-generated method stub
+		try (Statement stmt = mySQLConnection.createStatement()) {
+
+			String query = "UPDATE ecosystem.animals " + "SET age = " + animal.getAge() + ", weight = "
+					+ animal.getWeight() + ", health = " + animal.getHealth() + "WHERE animal_id = " + id;
+
+			int rs = stmt.executeUpdate(query);
+			if (rs == 1) {
+				System.out.println(animal + " has been successfully update from database with an ID: " + id);
+			} else {
+				System.out.println(animal + " is not exist in database.");
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 		return 0;
 	}
 
