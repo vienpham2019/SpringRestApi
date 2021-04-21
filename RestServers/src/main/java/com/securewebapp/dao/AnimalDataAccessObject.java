@@ -40,17 +40,18 @@ public class AnimalDataAccessObject implements AnimalDao {
 		// TODO Auto-generated method stub
 		animal.setAnimal_id(++count);
 		try (Statement stmt = mySQLConnection.createStatement()) {
-			StringBuilder insert = new StringBuilder("INSERT INTO ecosystem.animals VALUES("); 
-			insert.append(animal.getAnimal_id() + ", '"); 
-			insert.append(animal.getAnimal_type() + "', "); 
-			insert.append(animal.getAge() + ", "); 
-			insert.append(animal.getWeight() + ", '"); 
-			insert.append(animal.getSex() + "', ");
-			insert.append(animal.getHealth() + ", '"); 
-			insert.append(animal.getEcosystem() + "');"); 
+			
+			String query = "INSERT INTO ecosystem.animals VALUES(" + 
+							animal.getAnimal_id() + ", '" + 
+							animal.getAnimal_type() + "', " + 
+							animal.getAge() + ", " + 
+							animal.getWeight() + ", '" + 
+							animal.getSex() + "', " + 
+							animal.getHealth() + ", '" + 
+							animal.getEcosystem() + "');";  
 			
 			// Execute the query and wait for the result set
-			int result = stmt.executeUpdate(insert.toString());
+			int result = stmt.executeUpdate(query);
 			if (result == 1) {
 				System.out.println(result + " rows inserted: " + animal);
 			}
