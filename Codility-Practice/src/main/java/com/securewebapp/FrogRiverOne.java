@@ -58,14 +58,15 @@ public class FrogRiverOne {
 		 }
 		 
 		 for(int i = 0 ; i < A.length ; i ++) {
-			 if(counter.remove(A[i])) return i; 
+			 if(counter.remove(A[i])) 
+				 if(counter.isEmpty()) return i; 
 		 }
 		 
-		 return 0; 
+		 return -1; 
 	 }
 	 
 	 public static void main (String[] args) {
-		 System.out.println(new FrogRiverOne().solution(5, new int[] {1,3,1,4,2,3,5,4}));
+		 System.out.println(new FrogRiverOne().solution(5, new int[] {1,3,1,4,2,3,2,4}));
 	 }
 }
 
