@@ -1,4 +1,4 @@
-package com.securewebapp;
+package com.securewebapp.sorting;
 
 import java.util.*;
 
