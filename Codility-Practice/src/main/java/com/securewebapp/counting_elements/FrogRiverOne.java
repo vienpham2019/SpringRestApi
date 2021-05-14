@@ -1,4 +1,4 @@
-package com.securewebapp;
+package com.securewebapp.counting_elements;
 import java.util.*;
 
 //A small frog wants to get to the other side of a river. 

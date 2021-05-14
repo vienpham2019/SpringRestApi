@@ -1,4 +1,4 @@
-package com.securewebapp;
+package com.securewebapp.prefix_sums;
 
 //A DNA sequence can be represented as a string consisting of the letters A, C, G and T, which correspond to the types of successive nucleotides in the sequence. 
 //Each nucleotide has an impact factor, which is an integer. 

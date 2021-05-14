@@ -1,4 +1,4 @@
-package com.securewebapp;
+package com.securewebapp.prefix_sums;
 
 //Write a function:
 //

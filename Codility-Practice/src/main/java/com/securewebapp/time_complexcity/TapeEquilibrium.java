@@ -1,4 +1,4 @@
-package com.securewebapp;
+package com.securewebapp.time_complexcity;
 
 //A non-empty array A consisting of N integers is given. Array A represents numbers on a tape.
 //

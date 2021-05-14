@@ -1,4 +1,4 @@
-package com.securewebapp;
+package com.securewebapp.time_complexcity;
 import java.util.*;
 
 //An array A consisting of N different integers is given. 

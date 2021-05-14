@@ -1,4 +1,4 @@
-package com.securewebapp;
+package com.securewebapp.counting_elements;
 
 //You are given N counters, initially set to 0, and you have two possible operations on them:
 //

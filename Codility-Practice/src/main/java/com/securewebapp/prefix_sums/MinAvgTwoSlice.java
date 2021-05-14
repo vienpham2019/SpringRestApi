@@ -1,4 +1,4 @@
-package com.securewebapp;
+package com.securewebapp.prefix_sums;
 
 //A non-empty array A consisting of N integers is given. 
 //A pair of integers (P, Q), such that 0 ≤ P < Q < N, is called a slice of array A (notice that the slice contains at least two elements).

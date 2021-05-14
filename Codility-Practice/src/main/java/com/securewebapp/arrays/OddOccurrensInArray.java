@@ -1,4 +1,4 @@
-package com.securewebapp;
+package com.securewebapp.arrays;
 
 import java.util.*;
 
