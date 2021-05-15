@@ -27,7 +27,7 @@ public class CountFactor {
 		if(N <= 1) return 1; 
 		int result = 0; 
 		
-		for(int i = 1; i < Math.sqrt((double)N); i ++) {
+		for(int i = 1; i <= Math.sqrt((double)N); i ++) {
 			if(N % i == 0) {
 				result ++; 
 				System.out.println(i);
@@ -42,7 +42,7 @@ public class CountFactor {
 	}
 	
 	public static void main (String[] args) {
-		System.out.println(new CountFactor().solution(1));
+		System.out.println(new CountFactor().solution(16));
 	}
 
 }
