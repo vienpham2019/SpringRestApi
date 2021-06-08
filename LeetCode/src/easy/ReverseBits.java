@@ -41,7 +41,7 @@ public class ReverseBits {
 			output <<= 1;
 			System.out.println(Integer.toBinaryString(output) + " integer : " + output);
 			if((n & 1) == 1) {
-				output += 1; 
+				output ++; 
 				System.out.println("find one : " + output + ": " + Integer.toBinaryString(output));
 			}
 			n >>= 1;
