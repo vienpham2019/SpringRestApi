@@ -51,13 +51,13 @@ public class NumberOf1Bits {
 	
 	public static void main(String [] args) {
 		
-//		int n = 19; 
-//		System.out.println(Integer.toBinaryString(n));
-//		System.out.println(Integer.toBinaryString(n - 1));
-//		System.out.println(Integer.toBinaryString(n & n -1));
-//		System.out.println(n & n-1);
+		int n = 5; 
+		System.out.println(Integer.toBinaryString(n));
+		System.out.println(Integer.toBinaryString(n - 1));
+		System.out.println(Integer.toBinaryString(n & n -1));
+		System.out.println(n & n-1);
 		
-		System.out.println(new NumberOf1Bits().solution(14));
+//		System.out.println(new NumberOf1Bits().solution(14));
 	}
 }
 
